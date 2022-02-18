@@ -18,7 +18,7 @@ p {
     color: rgb(0 0 0 100%);
 }
 
-input {
+#qty {
     border: 0.3em solid #bbc3c6;
     padding: 0.5em 0.3em;
     font-size: 1.4em;
