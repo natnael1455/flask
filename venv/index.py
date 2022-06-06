@@ -4,28 +4,25 @@ app = Flask(__name__)
 
 
 def payload_creator(product):
-    start = True
-    payload = ""
-    for key, value in product.items():
-        if int(value) != 0:
-            if start:
-                payload = key + "_" + value
-                start = False
-            else:
-                payload = payload + "_" + key + "_" + value
-        if start:
-            payload = "error"
-    return payload
+
+    items = reduce(
+        lambda x, key: x + "_" + key[0] + "_" + key[1] if int(key[1]) != 0 else x,
+        product.items(),
+        "",
+    )
+
+    return items[1:]
 
 
 def url_creator(product):
     payload = payload_creator(product)
-    url = ""
-    uri = "https://t.me/kamata_test_bot?start=o_x"
-    if payload != "error":
-        url = uri + payload
-    else:
+
+    uri = "http://t.me/natis_test_bot?start=o_x"
+
+    if payload == "":
         url = "error"
+    else:
+        url = uri + payload
     return url
 
 
